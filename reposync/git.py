@@ -48,10 +48,13 @@ class Git:
         cmd = meta[0] if len(meta) >= 1 else ''
 
         get = 'go get -v -u {}/{}'.format(repository.url, cmd)
-        subprocess.Popen(get.split()).wait()
+        subprocess.call(get.split())
 
-        command = 'ln -v -s {}/{} {}'.format(self.gopath + '/src',
-                                             repository.url, repository.path)
-        subprocess.Popen(command.split()).wait()
+        mkdir = 'mkdir -p {}'.format(os.path.dirname(repository.path))
+        subprocess.call(mkdir.split())
+
+        ln = 'ln -v -s {}/{} {}'.format(self.gopath + '/src', repository.url,
+                                        repository.path)
+        subprocess.call(ln.split())
 
         print("done.")
