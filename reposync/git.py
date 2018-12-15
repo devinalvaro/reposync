@@ -45,7 +45,7 @@ class Git:
             return
 
         meta = repository.meta
-        cmd = meta[0]
+        cmd = meta[0] if len(meta) >= 1 else ''
 
         get = 'go get -v -u {}/{}'.format(repository.url, cmd)
         subprocess.Popen(get.split()).wait()
