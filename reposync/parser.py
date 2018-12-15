@@ -14,23 +14,25 @@ class Parser:
         with open(filename, 'r') as file:
             return yaml.load(file)
 
-    def build_tree(self, node, basename=''):
+    def build_tree(self, node, basenames=[]):
+        path = '/'.join(basenames)
+
         if self.is_normal_repository(node):
-            repository = Repository(url=node)
-            return Tree(basename, repository, children=[])
+            repository = Repository(path, url=node)
+            return Tree(repository, children=[])
 
         if self.is_special_repository(node):
             url = node[1]
             kind = node[0]
             meta = node[2:] if len(node) >= 3 else []
-            repository = Repository(url, kind, meta)
-            return Tree(basename, repository, children=[])
+            repository = Repository(path, url, kind, meta)
+            return Tree(repository, children=[])
 
         children = [
-            self.build_tree(child, basename)
+            self.build_tree(child, basenames + [basename])
             for basename, child in node.items()
         ]
-        return Tree(basename, repository=None, children=children)
+        return Tree(repository=None, children=children)
 
     def is_normal_repository(self, node):
         return isinstance(node, str)
