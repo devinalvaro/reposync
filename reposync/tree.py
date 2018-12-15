@@ -3,12 +3,12 @@ class Tree:
         self.repository = repository
         self.children = children
 
-    def exec(self, command):
-        if repository is not None:
-            command(repository)
+    def execute(self, command):
+        if self.repository is not None:
+            command(self.repository)
 
-        for child in children:
-            child.exec(command)
+        for child in self.children:
+            child.execute(command)
 
 class Repository:
     def __init__(self, path, url, kind='git', meta=[]):

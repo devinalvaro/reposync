@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 import git
 
 
@@ -6,7 +9,7 @@ class Git:
         self.gopath = config.get('gopath')
         self.scheme = config.get('scheme')
 
-    def clone(repository):
+    def clone(self, repository):
         if repository.kind == 'go':
             self.go_get(repository)
             return
@@ -19,7 +22,7 @@ class Git:
         else:
             print("cloned.")
 
-    def pull(repository):
+    def pull(self, repository):
         if repository.kind == 'go':
             self.go_get(repository)
             return
@@ -34,7 +37,7 @@ class Git:
 
     # private
 
-    def go_get(repository):
+    def go_get(self, repository):
         print("Getting", repository.path, "...", end="", flush=True)
 
         if os.path.isdir(repository.path):
@@ -44,11 +47,13 @@ class Git:
         meta = repository.meta
         cmd = meta[0]
 
+        print("Hihi", cmd)
+
         get = 'go get -v -u {}/{}'.format(repository.url, cmd)
         subprocess.Popen(get.split()).wait()
 
         command = 'ln -v -s {}/{} {}'.format(
-            self.gopath + '/src', repository.url, repository.path[:-1])
+            self.gopath + '/src', repository.url, repository.path)
         subprocess.Popen(command.split()).wait()
 
         print("done.")
