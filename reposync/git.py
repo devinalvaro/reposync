@@ -1,29 +1,30 @@
-class VersionControl:
+import git
+
+
+class Git:
     def __init__(self, config):
         self.gopath = config.get('gopath')
-        self.pull = config.get('pull')
         self.scheme = config.get('scheme')
 
-
-class Git(VersionControl):
-    def __init__(self, config):
-        super().__init__(config)
-
     def clone(repository):
-        print("Cloning", repository.path, "...", end="", flush=True)
+        if repository.kind == 'go':
+            self.go_get(repository)
+            return
 
+        print("Cloning", repository.path, "...", end="", flush=True)
         try:
             git.Repo.clone_from(self.scheme + repository.url, repository.path)
         except git.exc.GitCommandError:
-            self.pull(repository.url, repository.path)
+            print("skipped.")
         else:
             print("cloned.")
 
     def pull(repository):
-        if not self.pull:
-            print("skipped.")
+        if repository.kind == 'go':
+            self.go_get(repository)
             return
 
+        print("Pulling", repository.path, "...", end="", flush=True)
         try:
             git.Git(repository.path).pull()
         except git.exc.GitCommandError:
@@ -31,12 +32,9 @@ class Git(VersionControl):
         else:
             print("pulled.")
 
+    # private
 
-class Go(VersionControl):
-    def __init__(self, config):
-        super().__init__(config)
-
-    def get(repository):
+    def go_get(repository):
         print("Getting", repository.path, "...", end="", flush=True)
 
         if os.path.isdir(repository.path):
@@ -49,7 +47,8 @@ class Go(VersionControl):
         get = 'go get -v -u {}/{}'.format(repository.url, cmd)
         subprocess.Popen(get.split()).wait()
 
-        command = 'ln -v -s {}/{} {}'.format(GOPATH + '/src', url, path[:-1])
+        command = 'ln -v -s {}/{} {}'.format(
+            self.gopath + '/src', repository.url, repository.path[:-1])
         subprocess.Popen(command.split()).wait()
 
         print("done.")
