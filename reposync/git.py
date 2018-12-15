@@ -47,13 +47,11 @@ class Git:
         meta = repository.meta
         cmd = meta[0]
 
-        print("Hihi", cmd)
-
         get = 'go get -v -u {}/{}'.format(repository.url, cmd)
         subprocess.Popen(get.split()).wait()
 
-        command = 'ln -v -s {}/{} {}'.format(
-            self.gopath + '/src', repository.url, repository.path)
+        command = 'ln -v -s {}/{} {}'.format(self.gopath + '/src',
+                                             repository.url, repository.path)
         subprocess.Popen(command.split()).wait()
 
         print("done.")
