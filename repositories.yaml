@@ -1,10 +1,12 @@
-Your-Projects:
-  First-Dir:
-    github.com/yourusername/alpha
-  Second-Dir:
-    github.com/yourusername/beta
-    github.com/yourusername/omega
+Projects:
+  Past:
+    alpha: github.com/yourusername/alpha
+  Current:
+    beta: github.com/yourusername/beta
+    omega: github.com/yourusername/omega
 
-Awesome-Projects:
+Dotfiles: github.com/yourusername/dotfiles
+
+Others:
   TensorFlow: github.com/tensorflow/tensorflow
   Helm: [go, github.com/helm/helm, cmd/helm]
