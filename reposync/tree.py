@@ -10,6 +10,7 @@ class Tree:
         for child in self.children:
             child.execute(command)
 
+
 class Repository:
     def __init__(self, path, url, kind='git', meta=[]):
         self.path = path
