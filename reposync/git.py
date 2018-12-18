@@ -8,6 +8,7 @@ class Git:
     def __init__(self, config):
         self.gopath = config.get('gopath')
         self.scheme = config.get('scheme')
+        self.update = config.get('update')
         self.verbose = config.get('verbose')
 
     def clone(self, repository):
@@ -48,19 +49,29 @@ class Git:
         meta = repository.meta
         cmd = meta[0] if len(meta) >= 1 else ''
 
-        get = 'go get {} -u {}/{}'.format(self.verbose_flag, repository.url,
-                                          cmd)
+        get = 'go get {} {}/{}'.format(self.go_get_flags(), repository.url,
+                                       cmd)
         subprocess.call(get.split())
 
         mkdir = 'mkdir -p {}'.format(os.path.dirname(repository.path))
         subprocess.call(mkdir.split())
 
-        ln = 'ln {} -s {}/{} {}'.format(self.verbose_flag,
-                                        self.gopath + '/src', repository.url,
-                                        repository.path)
+        ln = 'ln {} {}/{} {}'.format(self.ln_flags(), self.gopath + '/src',
+                                     repository.url, repository.path)
         subprocess.call(ln.split())
 
         print("done.")
+
+    def go_get_flags(self):
+        flags = [self.update_flag(), self.verbose_flag()]
+        return ' '.join(flags)
+
+    def ln_flags(self):
+        flags = [self.verbose_flag(), '-s']
+        return ' '.join(flags)
+
+    def update_flag(self):
+        return '-v' if self.update else ''
 
     def verbose_flag(self):
         return '-v' if self.verbose else ''
