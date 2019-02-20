@@ -52,3 +52,7 @@ In Go, it is preferred to put repositories at GOPATH. reposync supports this by 
 To specify a Go repository, you need to put a special list. In the example above, `Helm` is a Go repository and its value is `[go, github.com/helm/helm, cmd/helm]`. The first element indicates Go repository, the second is the import path, and the last is the binary location (optional, defaults to the import path).
 
 Internally, reposync will first run `go get github.com/helm/helm/cmd/helm` then `ln -s $GOPATH/src/github.com/helm/helm/cmd/helm Others/Helm`.
+
+### SSH Support
+
+Reposync supports cloning repositories using ssh, just pass `--method=ssh` (which defaults to `--method=https`). This argument will make reposync automatically use repository URLs' (found in `repositories.yaml`) corresponding ssh URLs.
