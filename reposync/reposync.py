@@ -5,10 +5,10 @@ from .parser import Parser
 
 
 class Reposync:
-    def __init__(self, file='repositories.yaml', scheme='https',
+    def __init__(self, file='repositories.yaml', method='https',
                  update=False, verbose=False):
         self.__file = file
-        self.__scheme = scheme + '://'
+        self.__method = method
         self.__update = update
         self.__verbose = verbose
 
@@ -29,6 +29,6 @@ class Reposync:
     def __build_config(self):
         return dict(
             gopath=os.getenv('GOPATH'),
-            scheme=self.__scheme,
+            method=self.__method,
             update=self.__update,
             verbose=self.__verbose)
