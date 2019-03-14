@@ -12,7 +12,7 @@ class Parser:
 
     def open_yaml(self, filename):
         with open(filename, 'r') as f:
-            return yaml.load(f)
+            return yaml.load(f, Loader=yaml.SafeLoader)
 
     def build_tree(self, node, basenames=[]):
         path = '/'.join(basenames)
