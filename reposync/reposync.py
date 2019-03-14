@@ -15,7 +15,7 @@ class Reposync:
         parser = Parser()
         self.__tree = parser.parse(self.__file)
 
-        config = self.__build_config()
+        config = self.build_config()
         self.__git = Git(config)
 
     def clone(self):
@@ -26,7 +26,7 @@ class Reposync:
 
     # private
 
-    def __build_config(self):
+    def build_config(self):
         return dict(
             gopath=os.getenv('GOPATH'),
             method=self.__method,

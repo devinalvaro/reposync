@@ -11,8 +11,8 @@ class Parser:
     # private
 
     def open_yaml(self, filename):
-        with open(filename, 'r') as file:
-            return yaml.load(file)
+        with open(filename, 'r') as f:
+            return yaml.load(f)
 
     def build_tree(self, node, basenames=[]):
         path = '/'.join(basenames)
