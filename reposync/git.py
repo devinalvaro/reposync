@@ -16,26 +16,26 @@ class Git:
             self.go_get(repository)
             return
 
-        print("Cloning", repository.path, "...", end="", flush=True)
+        print("Cloning", repository.path, "...")
         try:
             git.Repo.clone_from(self.get_clone_url(repository.url), repository.path)
         except git.exc.GitCommandError:
-            print("skipped.")
+            print("Skipped cloning", repository.path)
         else:
-            print("cloned.")
+            print("Cloned", repository.path)
 
     def pull(self, repository):
         if repository.kind == 'go':
             self.go_get(repository)
             return
 
-        print("Pulling", repository.path, "...", end="", flush=True)
+        print("Pulling", repository.path, "...")
         try:
             git.Git(repository.path).pull()
         except git.exc.GitCommandError:
-            print("failed.")
+            print("Failed pulling", repository.path)
         else:
-            print("pulled.")
+            print("Pulled", repository.path)
 
     # private
 
@@ -54,10 +54,10 @@ class Git:
         return 'git@' + host + ':' + path + '.git'
 
     def go_get(self, repository):
-        print("Getting", repository.path, "...", end="", flush=True)
+        print("Getting", repository.path)
 
         if os.path.isdir(repository.path):
-            print("skipped.")
+            print("Skipped getting", repository.path)
             return
 
         meta = repository.meta
@@ -74,7 +74,7 @@ class Git:
                                      repository.url, repository.path)
         subprocess.call(ln.split())
 
-        print("done.")
+        print("Got", repository.path)
 
     def go_get_flags(self):
         flags = [self.update_flag(), self.verbose_flag()]
