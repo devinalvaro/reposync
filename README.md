@@ -56,3 +56,7 @@ Internally, reposync will first run `go get github.com/helm/helm/cmd/helm` then 
 ### SSH Support
 
 Reposync supports cloning repositories using ssh, just pass `--method=ssh` (which defaults to `--method=https`). This argument will make reposync automatically use repository URLs' (found in `repositories.yaml`) corresponding ssh URLs.
+
+### Concurrency Support
+
+Reposync supports executing commands concurrently via multithreading by passing `--concurrent`.
