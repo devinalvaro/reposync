@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f2ae34c012abbeb9b30567de1d3ede55eac2deecbbb34b2ef2a5d5cbebb4b42f"
+            "sha256": "7559270de60d1f92c843fb6b72aa28df3fd0731ee911341425b842716a944fd8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -61,9 +61,6 @@
                 "sha256:e23d0cc5299223dcc37885dae624f382297717e459ea24053709675a976a3e19"
             ],
             "version": "==5.1"
-        },
-        "reposync": {
-            "file": "file:///home/devin/Codes/Projects/Reposync"
         },
         "six": {
             "hashes": [
