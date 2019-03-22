@@ -6,13 +6,13 @@ import git
 
 class Git:
     def __init__(self, config):
-        self.gopath = config.get('gopath')
-        self.method = config.get('method')
-        self.update = config.get('update')
-        self.verbose = config.get('verbose')
+        self.gopath = config.get("gopath")
+        self.method = config.get("method")
+        self.update = config.get("update")
+        self.verbose = config.get("verbose")
 
     def clone(self, repository):
-        if repository.kind == 'go':
+        if repository.kind == "go":
             self.go_get(repository)
             return
 
@@ -25,7 +25,7 @@ class Git:
             print("Cloned", repository.path)
 
     def pull(self, repository):
-        if repository.kind == 'go':
+        if repository.kind == "go":
             self.go_get(repository)
             return
 
@@ -40,18 +40,18 @@ class Git:
     # private
 
     def get_clone_url(self, repository_url):
-        if self.method == 'https':
+        if self.method == "https":
             return self.convert_to_https_url(repository_url)
-        if self.method == 'ssh':
+        if self.method == "ssh":
             return self.convert_to_ssh_url(repository_url)
 
     def convert_to_https_url(self, repository_url):
-        return 'https://' + repository_url + '.git'
+        return "https://" + repository_url + ".git"
 
     def convert_to_ssh_url(self, repository_url):
-        url_splits = repository_url.split('/')
-        host, path = url_splits[0], '/'.join(url_splits[1:])
-        return 'git@' + host + ':' + path + '.git'
+        url_splits = repository_url.split("/")
+        host, path = url_splits[0], "/".join(url_splits[1:])
+        return "git@" + host + ":" + path + ".git"
 
     def go_get(self, repository):
         print("Getting", repository.path)
@@ -61,31 +61,31 @@ class Git:
             return
 
         meta = repository.meta
-        cmd = meta[0] if len(meta) >= 1 else ''
+        cmd = meta[0] if len(meta) >= 1 else ""
 
-        get = 'go get {} {}/{}'.format(self.go_get_flags(), repository.url,
-                                       cmd)
+        get = "go get {} {}/{}".format(self.go_get_flags(), repository.url, cmd)
         subprocess.call(get.split())
 
-        mkdir = 'mkdir -p {}'.format(os.path.dirname(repository.path))
+        mkdir = "mkdir -p {}".format(os.path.dirname(repository.path))
         subprocess.call(mkdir.split())
 
-        ln = 'ln {} {}/{} {}'.format(self.ln_flags(), self.gopath + '/src',
-                                     repository.url, repository.path)
+        ln = "ln {} {}/{} {}".format(
+            self.ln_flags(), self.gopath + "/src", repository.url, repository.path
+        )
         subprocess.call(ln.split())
 
         print("Got", repository.path)
 
     def go_get_flags(self):
         flags = [self.update_flag(), self.verbose_flag()]
-        return ' '.join(flags)
+        return " ".join(flags)
 
     def ln_flags(self):
-        flags = [self.verbose_flag(), '-s']
-        return ' '.join(flags)
+        flags = [self.verbose_flag(), "-s"]
+        return " ".join(flags)
 
     def update_flag(self):
-        return '-v' if self.update else ''
+        return "-v" if self.update else ""
 
     def verbose_flag(self):
-        return '-v' if self.verbose else ''
+        return "-v" if self.verbose else ""

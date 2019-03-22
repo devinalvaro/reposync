@@ -11,11 +11,11 @@ class Parser:
     # private
 
     def open_yaml(self, filename):
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             return yaml.load(f, Loader=yaml.SafeLoader)
 
     def build_tree(self, node, basenames=[]):
-        path = '/'.join(basenames)
+        path = "/".join(basenames)
 
         if self.is_normal_repository(node):
             repository = Repository(path, url=node)
