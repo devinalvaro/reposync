@@ -1,23 +1,22 @@
-import os
-import subprocess
-
 import git
+
+from .commander import Commander
 
 
 class Git:
     def __init__(self, config):
+        self.commander = Commander(config)
+
         self.gopath = config.get("gopath")
         self.method = config.get("method")
-        self.update = config.get("update")
-        self.verbose = config.get("verbose")
 
     def clone(self, repository):
         if repository.kind == "go":
-            ln_dir = os.path.dirname(repository.path)
-            repository.path = self.prepend_gopath(repository.url)
+            link_name = repository.path
+            target = self.prepend_gopath(repository.url)
+            self.commander.ln(target, link_name)
 
-            ln = "ln {} -t {} {}".format(self.ln_flags(), ln_dir, repository.path)
-            subprocess.call(ln.split())
+            repository.path = target
 
         print("Cloning", repository.path, "...")
         try:
@@ -57,10 +56,3 @@ class Git:
 
     def prepend_gopath(self, repository_url):
         return "{}/src/{}".format(self.gopath, repository_url)
-
-    def ln_flags(self):
-        flags = [self.verbose_flag(), "-s"]
-        return " ".join(flags)
-
-    def verbose_flag(self):
-        return "-v" if self.verbose else ""
