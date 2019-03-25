@@ -18,8 +18,7 @@ class Tree:
 
 
 class Repository:
-    def __init__(self, path, url, kind="git", meta=[]):
+    def __init__(self, path, url, kind="git"):
         self.path = path
         self.url = url
         self.kind = kind
-        self.meta = meta

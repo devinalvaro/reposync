@@ -24,8 +24,7 @@ class Parser:
         if self.is_special_repository(node):
             url = node[1]
             kind = node[0]
-            meta = node[2:] if len(node) >= 3 else []
-            repository = Repository(path, url, kind, meta)
+            repository = Repository(path, url, kind)
             return Tree(repository, children=[])
 
         children = [
