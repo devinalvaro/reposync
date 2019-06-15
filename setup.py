@@ -5,8 +5,8 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="reposync",
-    version="0.5.0",
-    description="reposync helps you manage many git repositories.",
+    version="0.5.1",
+    description="reposync helps you manage a lot of git repositories.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/devinalvaro/reposync",

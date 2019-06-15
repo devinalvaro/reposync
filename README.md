@@ -1,6 +1,6 @@
 # reposync
 
-reposync helps you manage many git repositories. By declaring the repositories in a YAML file, reposync can then apply various git commands (limited to `clone` and `pull` for now) to the repositories in appropriate manners.
+reposync helps you manage a lot of git repositories. By declaring the repositories in a YAML file, reposync can then apply various git commands (limited to `clone` and `pull` for now) to the repositories in appropriate manners.
 
 ## Installation
 
