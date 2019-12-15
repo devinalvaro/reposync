@@ -1,9 +1,17 @@
 [tool.poetry]
 name = "reposync"
-version = "0.6.0"
+version = "0.6.1"
 description = "Organize git repositories."
 authors = ["Devin Alvaro <devin.alvaro@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+repository = "http://github.com/devinalvaro/reposync"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Version Control :: Git",
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
