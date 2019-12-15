@@ -44,7 +44,3 @@ Then run `$ reposync clone` to clone the repositories, resulting in the director
 To update these repositories, use `$ reposync pull`.
 
 You can specify the YAML file with `--file <filename>.yaml`. For the full options, see `$ reposync -- --help`.
-
-### Concurrency Support
-
-Reposync supports executing commands concurrently via multithreading by passing `--concurrent`.
