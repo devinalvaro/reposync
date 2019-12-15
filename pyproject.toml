@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reposync"
-version = "0.6.1"
+version = "0.6.2"
 description = "Organize git repositories."
 authors = ["Devin Alvaro <devin.alvaro@gmail.com>"]
 license = "MIT"
@@ -20,6 +20,9 @@ gitpython = "^3.0.5"
 pyaml = "^19.12.0"
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+reposync = 'reposync.console:main'
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -1,8 +1,7 @@
-#!/usr/bin/env python
-
 import fire
 
 from reposync import Reposync
 
-if __name__ == '__main__':
+
+def main():
     fire.Fire(Reposync)
