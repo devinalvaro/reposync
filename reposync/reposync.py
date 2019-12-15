@@ -35,7 +35,6 @@ class Reposync:
 
     def build_config(self):
         return dict(
-            gopath=os.getenv("GOPATH"),
             method=self.__method,
             update=self.__update,
             verbose=self.__verbose,
