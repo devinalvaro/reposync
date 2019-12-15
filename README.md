@@ -45,10 +45,6 @@ To update these repositories, use `$ reposync pull`.
 
 You can specify the YAML file with `--file <filename>.yaml`. For the full options, see `$ reposync -- --help`.
 
-### SSH Support
-
-Reposync supports cloning repositories using ssh, just pass `--method=ssh` (which defaults to `--method=https`). This argument will make reposync automatically use repository URLs' (found in `repositories.yaml`) corresponding ssh URLs.
-
 ### Concurrency Support
 
 Reposync supports executing commands concurrently via multithreading by passing `--concurrent`.

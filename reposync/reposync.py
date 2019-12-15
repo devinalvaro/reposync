@@ -8,7 +8,7 @@ class Reposync:
     def __init__(
         self,
         file="repositories.yaml",
-        method="https",
+        method="ssh",
         update=False,
         verbose=False,
         concurrent=False,
