@@ -1,6 +1,6 @@
 # reposync
 
-reposync helps you manage a lot of git repositories. By declaring the repositories in a YAML file, reposync can then apply various git commands (limited to `clone` and `pull` for now) to the repositories in appropriate manners.
+reposync helps you organize git repositories. By declaring the repositories in a YAML file, reposync can then apply various git commands (limited to `clone` and `pull` for now) to the repositories in appropriate manners.
 
 ## Installation
 
@@ -20,9 +20,9 @@ Projects:
 
 Dotfiles: github.com/yourusername/dotfiles
 
-Others:
+Contribs
   TensorFlow: github.com/tensorflow/tensorflow
-  Helm: [go, github.com/helm/helm]
+  Rust github.com/rust-lang/rust
 ```
 
 Then run `$ reposync clone` to clone the repositories, resulting in the directory structure below:
@@ -36,9 +36,9 @@ Then run `$ reposync clone` to clone the repositories, resulting in the director
 │       └── beta
 │       └── omega
 ├── Dotfiles
-└── Others
+└── Contribs
     ├── TensorFlow
-    └── Helm
+    └── Rust
 ```
 
 To update these repositories, use `$ reposync pull`.
