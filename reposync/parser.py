@@ -16,16 +16,15 @@ class Parser:
 
     def build_tree(self, node, basenames=[]):
         path = "/".join(basenames)
-
         if self.is_leaf(node):
             repository = Repository(path, url=node)
-            return Tree(repository, children=[])
+            return Tree(repository=repository)
 
         children = [
             self.build_tree(child, basenames + [basename])
             for basename, child in node.items()
         ]
-        return Tree(repository=None, children=children)
+        return Tree(children=children)
 
     def is_leaf(self, node):
         return isinstance(node, str)

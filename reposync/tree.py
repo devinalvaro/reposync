@@ -2,18 +2,18 @@ from threading import Thread
 
 
 class Tree:
-    def __init__(self, repository, children):
-        self.repository = repository
-        self.children = children
+    def __init__(self, repository=None, children=[]):
+        self.__repository = repository
+        self.__children = children
 
     def execute(self, command, concurrent=False):
-        if self.repository is not None:
+        if self.__repository is not None:
             if concurrent:
-                Thread(target=command, args=(self.repository,)).start()
+                Thread(target=command, args=(self.__repository,)).start()
             else:
-                command(self.repository)
+                command(self.__repository)
 
-        for child in self.children:
+        for child in self.__children:
             child.execute(command, concurrent=concurrent)
 
 

@@ -3,7 +3,7 @@ import git
 
 class Git:
     def __init__(self, method):
-        self.method = method
+        self.__method = method
 
     def clone(self, repository):
         print("Cloning", repository.path, "...")
@@ -26,9 +26,9 @@ class Git:
     # private
 
     def get_clone_url(self, repository_url):
-        if self.method == "https":
+        if self.__method == "https":
             return self.convert_to_https_url(repository_url)
-        if self.method == "ssh":
+        if self.__method == "ssh":
             return self.convert_to_ssh_url(repository_url)
         raise ValueError("invalid method")
 
